@@ -4,29 +4,31 @@
         <div class="text">
             <p><strong>Pay period totals:</strong></p>
             {% if weekly_totals %}
-            <ul>
-                <li><a href="/chronos/{{user}}/{{year}}/{{month}}/payperiod/1">First: <strong>{{payperiod_totals.first}}</strong></a></li>
-                <li><a href="/chronos/{{user}}/{{year}}/{{month}}/payperiod/2">Second: <strong>{{payperiod_totals.second}}</strong></a></li>
-            </ul>
+            <div class="list-group">
+                <a href="/chronos/{{user}}/{{year}}/{{month}}/payperiod/1" class="list-group-item">First: <strong>{{payperiod_totals.first}}</strong></a>
+                <a href="/chronos/{{user}}/{{year}}/{{month}}/payperiod/2" class="list-group-item">Second: <strong>{{payperiod_totals.second}}</strong></a>
+            </div>
             {% else %}
-                <p>No shifts this month</p>
+              <div class="list-group">
+                <p>No shifts this month</a>
+              </div>
             {% endif %}
         </div>
         <div class="text">
             <p><strong>Weekly totals:</strong></p>
             {% if weekly_totals %}
-                <ul>
+                <div class="list-group">
                 {% for week in weekly_totals %}
-                    <li><a href="/chronos/{{user}}/{{year}}/{{month}}/week/{{week.week}}">Week {{week.week}}: <strong>{{week.total}}</strong></a></li>
+                    <a href="/chronos/{{user}}/{{year}}/{{month}}/week/{{week.week}}" class="list-group-item">Week {{week.week}}: <strong>{{week.total}}</strong></a>
                 {% endfor %}
-                </ul>
+              </div>
             {% else %}
-                <p>No shifts this month</p>
+              <p>No shifts this month</p>
             {% endif %}
         </div>
     </div>
 
-    <div class="key_wrapper">
+    <div>
         <p><strong>Color key:</strong></p>
         <div class="today key">Today</div>
 
