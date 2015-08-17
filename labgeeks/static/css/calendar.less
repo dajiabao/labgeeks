@@ -6,12 +6,12 @@
         background-color: @insetBackground;
         font-size: 2.0em;
     }
-    
+
     tr:nth-child(2) {
         background-color: @background;
         font-size: 1em;
     }
-    
+
     th.month, tr:nth-child(2) th{
         height: 2em;
         border-top: 1px solid black;
@@ -34,8 +34,14 @@
         background-color: @scale22;
     }
 
+    .first, .second, .first.filled, .second.filled, {
+        border-radius: 5px;
+        color: @white;
+    }
+
     .today{
         border: .2em solid @highlight;
+        border-radius: 5px;
     }
 
     .noday{
