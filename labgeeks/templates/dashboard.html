@@ -9,17 +9,25 @@
 {% endblock%}
 
 {% block content %}
-    <div id="login_info">
-            <h1>Dashboard</h1>
-            <h2>Hello {{request.user.first_name}}</h2>
+    <div>
+           <h1>Dashboard</h1>
+           <h2>Hello {{request.user.first_name}}</h2>
 
         {% if locations %}
-            {% for location in locations %}
-                <h3>You are clocked <span id="in">IN</span></h3>
-                <h2>@{{location.name}}, {{clockin_time}}</h2>
-            {% endfor %}
+          <div class="btn-group">
+            <button type="button" class="btn btn-success">You are clocked IN</button>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+              {% for location in locations %}
+                  <li><a href="#">{{location.name}}, {{clockin_time}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
         {% else %}
-            <h3>You are clocked <span id="out">OUT</span></h3>
+            <button type="button" class="btn btn-danger">You are clocked OUT</button>
         {% endif %}
 
     {%if events or alerts %}
