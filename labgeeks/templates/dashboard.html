@@ -35,43 +35,62 @@
         <form method="post" action="" style="padding-top:0em"> {% csrf_token %}
         {% endif %}
 
-          <div id='notificationwrap' style="width:100%">
         {% if events %}
-            <div id="events" style="overflow:hidden">
             <h3>Events</h3>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             {% for event in events %}
-                <div class="notification" style="float:left; margin-right: 10px;">
-                    <h2>{% if can_Add %}<input type="checkbox" name="pk" value="{{event.pk}}">{% endif %}
-                    {{event.due_date.month}}/{{event.due_date.day}} {{event.title}} </h2>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    {% if can_Add %}<input type="checkbox" name="pk" value="{{event.pk}}">{% endif %}
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">
+                      {{event.due_date.month}}/{{event.due_date.day}} {{event.title}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse{{forloop.counter}}" class="panel-collapse collapse in">
+                  <div class="panel-body">
                     {% if event.user%}
-                        <p class="info"> {{event.user}} posted on {{event.date}} </p>
+                        <p> {{event.user}} posted on {{event.date}} </p>
                     {% else %}
-                        <p class="info"> Labgeeks posted on {{event.date}} </p>
+                        <p> Labgeeks posted on {{event.date}} </p>
                     {% endif %}
                     <p> {{event.content}} </p>
-                    <p> Due on {{event.due_date}}</p>
+                    <p> <mark>Due on {{event.due_date}} </mark></p>
+                  </div>
                 </div>
+              </div>
             {% endfor %}
             </div>
         {% endif %}
 
         {% if alerts %}
-            <div id="alerts" style="overflow:hidden">
-                <h3>Alerts</h3>
-                {% for alert in alerts %}
-                    <div class="notification" style="float:left; margin-right: 10px;">
-                        <h2>{% if can_Add %}<input type="checkbox" name="pk" value="{{alert.pk}}">{% endif %}{{alert.title}} </h2>
-                        {% if alert.user%}
-                            <p class="info"> {{alert.user}} posted on {{alert.date}} </p>
-                        {% else %}
-                            <p class="info"> Labgeeks posted on {{alert.date}} </p>
-                        {% endif %}
-                        <p> {{alert.content}} </p>
-                    </div>
-                {% endfor %}
+            <h3>Alerts</h3>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% for alert in alerts %}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    {% if can_Add %}<input type="checkbox" name="pk" value="{{alert.pk}}">{% endif %}
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">
+                      {{alert.title}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse{{forloop.counter}}" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    {% if alert.user%}
+                        <p> {{alert.user}} posted on {{alert.date}} </p>
+                    {% else %}
+                        <p> Labgeeks posted on {{alert.date}} </p>
+                    {% endif %}
+                    <p> {{alert.content}} </p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
             </div>
         {% endif %}
-          </div>
     {% endif %}
 
     {% if events or alerts %}
@@ -120,5 +139,4 @@
             <span><p>From {{shift.scheduled_in.time}} to {{shift.scheduled_out.time}} at {{shift.location}}</p></span>
         {% endfor %}
     {% endif %}
-    </div>
 {% endblock %}
