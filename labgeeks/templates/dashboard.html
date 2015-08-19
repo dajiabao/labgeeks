@@ -100,34 +100,42 @@
         {% endif %}
     {% endif %}
 
+    <br />
+
     {% if can_Add%}
-        <h3>Post Alert or Event</h3>
         <div id="addNotification">
-            <form method="post" action="">{% csrf_token %}
-                <label class="input_label">
-                    <strong>Title
-                    {% if not form_is_valid %}
-                        <span class="required">*</span></strong>
-                    {% else %}
-                        </strong>
-                    {% endif %}
-                    {{ form.title }}
-                </label>
-                <label class="input_label">
-                    <strong>Content</strong>
-                    {{form.content}}
-                </label>
-                <label class="input_label">
-                    <strong>Due Date</strong>
-                    <p class="info">Add a due date to create an event</p>
-                    {{form.due_date}}
-                </label>
-                {% if not form_is_valid %}
-                    <p class="required">This field is required.</p>
-                {% endif %}
-                <input type="submit" class="btn btn-primary" value="Submit"/>
-            </form>
+          <div class="panel panel-info">
+          <div class="panel-heading">Post Alert or Event</div>
+          <div class="panel-body">
+              <form method="post" action="" id="form_dashboard">{% csrf_token %}
+                  <label>
+                      <h4><div class="label label-info">Title
+                      {% if not form_is_valid %}
+                          <span class="required">*</span></div></h4>
+                      {% else %}
+                      </div></h4>
+                      {% endif %}
+                      {{ form.title }}
+                  </label>
+                  <label>
+                      <h4><div class="label label-info">Content</div></h4>
+                      {{form.content}}
+                  </label>
+                  <label>
+                      <h4><div class="label label-info">Due Date</div></h4>
+                      <p class="text-info">Add a due date to create an event</p>
+                      {{form.due_date}}
+                  </label>
+                  {% if not form_is_valid %}
+                      <p class="required">This field is required.</p>
+                  {% endif %}
+                  <br />
+                  <br />
+                  <input type="submit" class="btn btn-primary btn-block" value="Submit"/>
+              </form>
+          </div>
         </div>
+      </div>
     {% endif %}
 
     {% if today_past_shifts or today_future_shifts %}
